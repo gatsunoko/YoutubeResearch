@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  url: MyString
+  thumbnail: MyString
+  posted_date: 2022-06-29 08:48:04
+  description: MyText
+  play_count: 1
+  channel_id: MyString
+  channel_name: MyString
+  channel_url: MyString
+
+two:
+  title: MyString
+  url: MyString
+  thumbnail: MyString
+  posted_date: 2022-06-29 08:48:04
+  description: MyText
+  play_count: 1
+  channel_id: MyString
+  channel_name: MyString
+  channel_url: MyString

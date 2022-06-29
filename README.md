@@ -1,48 +1,24 @@
-ディレクトリ名を使用したいプロジェクト名に変更
+# README
 
-ディレクトリ内のすべてのファイルの「GatsuRails」という文字を使用したいプロジェクト名に置換
-```
-$docker-compose build
-$docker-compose run --rm app rails new ./ -d mysql
-```
-config/enviroments/development.rbの
-```
-config.file_watcher = ActiveSupport::EventedFileUpdateChecker
-```
-を
-```
-config.file_watcher = ActiveSupport::FileUpdateChecker
-```
-に変更
-config/database.ymlを
-```
-default: &default
-  adapter: mysql2
-  encoding: utf8mb4
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: <%= ENV.fetch("MYSQL_USERNAME", "root") %>
-  password: <%= ENV.fetch("MYSQL_PASSWORD", "password") %>
-  host: <%= ENV.fetch("MYSQL_HOST", "db") %>
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
-development:
-  <<: *default
-  database: projectname_development
+Things you may want to cover:
 
-test:
-  <<: *default
-  database: projectname_test
+* Ruby version
 
-production:
-  <<: *default
-  database: projectname_production
-```
-に変更(projectnameは自分のプロジェクト名に)
-```
-$docker-compose run --rm app rails db:create
-$docker-compose run --rm app rails db:migrate
-```
-した後
-```
-$docker-compose up
-```
-でサーバー起動
+* System dependencies
+
+* Configuration
+
+* Database creation
+
+* Database initialization
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...

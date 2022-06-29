@@ -1,0 +1,21 @@
+= form_with(model: @newvideo) do |form|
+  .flex
+    %div
+      = form.text_field :url
+    %div
+      = form.submit
+= link_to '全て削除', all_delete_videos_path
+#videos
+  %table.table
+    %tr
+      %th{class: 'table-title'} タイトル
+      %th{class: 'table-thumbnail'} サムネ
+      %th{class: 'table-url'} リンク
+      %th{class: 'table-posted_date'} 投稿日時
+      %th{class: 'table-play_count'} 再生回数
+      %th{class: 'table-channel_name'} チャンネル名
+      %th{class: 'table-channel_member'} 登録者数
+      %th{class: 'table-video_power'} 再生率
+      %th{class: 'table-delete'} 削除
+    - @videos.each do |video|
+      = render video

@@ -1,0 +1,33 @@
+%tr{:id => "#{dom_id video}"}
+  %td.table-title.table-thumbnail
+    %p
+      = video.title.truncate(50)
+  %td.table-thumbnail
+    - if video.url.present?
+      = image_tag "http://img.youtube.com/vi/#{video.url}/mqdefault.jpg"
+  %td.table-url.table-thumbnail
+    = link_to "開く", "https://www.youtube.com/watch?v=#{video.url}", target: :_blank, rel: "noopener noreferrer"
+  %td.table-posted_date.table-thumbnail
+    %p
+      = video.posted_date.strftime('%Y/%m/%d/%H:%M')
+  %td.table-thumbnail
+    %p
+      - if video.play_count.present?
+        = number_with_delimiter(video.play_count).to_s
+  %td.table-channel_name.table-thumbnail
+    %p
+      = video.channel_name.truncate(30)
+    - if video.channel_icon.present? 
+      = image_tag video.channel_icon
+    %p
+      = link_to "開く", "https://www.youtube.com/channel/#{video.channel_id}", target: :_blank, rel: "noopener noreferrer"
+  %td.table-thumbnail
+    - if video.channel_member_count.present?
+      %p
+        = number_with_delimiter(video.channel_member_count).to_s
+  %td.table-thumbnail
+    - if video.play_count.present? && video.channel_member_count.present?
+      %p
+        = "#{video.view_rate}%"
+  %td
+    = button_to "削除", video, method: :delete

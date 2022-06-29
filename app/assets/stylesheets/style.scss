@@ -1,0 +1,20 @@
+.flex {
+  display: flex;
+}
+.table {
+  border: 1px solid black;
+  th,td {
+    border: 1px solid black;
+    padding: 5px;
+    text-align: center;
+    vertical-align: middle;
+  }
+}
+.table-title, .table-channel_name {
+  max-width: 150px;
+}
+
+.py-5 {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
