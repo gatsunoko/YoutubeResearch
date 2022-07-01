@@ -17,7 +17,7 @@ class VideosControllerTest < ActionDispatch::IntegrationTest
 
   test "should create video" do
     assert_difference("Video.count") do
-      post videos_url, params: { video: { channel_id: @video.channel_id, channel_name: @video.channel_name, channel_url: @video.channel_url, description: @video.description, play_count: @video.play_count, posted_date: @video.posted_date, thumbnail: @video.thumbnail, title: @video.title, url: @video.url } }
+      post videos_url, params: { video: { channel_id: @video.channel_id, channel_name: @video.channel_name, channel_url: @video.channel_url, description: @video.description, view_count: @video.view_count, posted_date: @video.posted_date, thumbnail: @video.thumbnail, title: @video.title, url: @video.url } }
     end
 
     assert_redirected_to video_url(Video.last)
@@ -34,7 +34,7 @@ class VideosControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update video" do
-    patch video_url(@video), params: { video: { channel_id: @video.channel_id, channel_name: @video.channel_name, channel_url: @video.channel_url, description: @video.description, play_count: @video.play_count, posted_date: @video.posted_date, thumbnail: @video.thumbnail, title: @video.title, url: @video.url } }
+    patch video_url(@video), params: { video: { channel_id: @video.channel_id, channel_name: @video.channel_name, channel_url: @video.channel_url, description: @video.description, view_count: @video.view_count, posted_date: @video.posted_date, thumbnail: @video.thumbnail, title: @video.title, url: @video.url } }
     assert_redirected_to video_url(@video)
   end
 

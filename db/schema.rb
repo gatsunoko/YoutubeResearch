@@ -17,14 +17,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_28_234804) do
     t.string "time"
     t.datetime "posted_date"
     t.text "description"
-    t.integer "play_count"
+    t.integer "view_count"
     t.string "channel_id"
     t.string "channel_name"
     t.string "channel_url"
     t.string "channel_icon"
     t.string "channel_create_date"
     t.string "channel_member_count"
-    t.string "view_rate"
+    t.float "view_rate"
+    t.boolean "protection", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

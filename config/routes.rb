@@ -3,6 +3,12 @@ Rails.application.routes.draw do
   resources :videos do
     collection do
       get :all_delete
+      get :channel_videos
+      get :order
+      get :channel_delete
+    end
+    member do
+      get :protection
     end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

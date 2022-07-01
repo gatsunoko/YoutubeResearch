@@ -6,14 +6,15 @@ class CreateVideos < ActiveRecord::Migration[7.0]
       t.string :time
       t.datetime :posted_date
       t.text :description
-      t.integer :play_count
+      t.integer :view_count
       t.string :channel_id
       t.string :channel_name
       t.string :channel_url
       t.string :channel_icon
       t.string :channel_create_date
       t.string :channel_member_count
-      t.string :view_rate
+      t.float :view_rate
+      t.boolean :protection, null: false, default: false
 
       t.timestamps
     end

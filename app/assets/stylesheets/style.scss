@@ -1,3 +1,489 @@
+:root {
+  --color1: #FFFFFF;/*しろ*/
+  --color2: #969696;/*文字に使うぐれい*/
+  --color3: #eee;/*濃いグレイ*/
+  --color4: #f7f8f8;/*背景に使うグレイ*/
+  --color5: #3e4853;/*文字に使う黒*/
+  --color6: #198fcc;/*submit_background*/
+  --color7: #2FA0DC;/*submit_border*/
+  --color8: #fd9827;/*購入済みの動画の文字色*/
+  --color9: #d02400;/*朱色*/
+}
+/* 基本スタイル */
+// @font-face {
+// 	font-family: 'lanove';
+// 	src: url('/fonts/lanove.otf');
+// }
+* {
+  box-sizing: border-box;
+  font-family: "メイリオ", sans-serif;
+  // font-family: "lanove";
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color4);
+}
+p {
+  font-size: 16px;
+  line-height: 1.4;
+  margin-bottom: 10px;
+}
+h1 {
+  font-size: 24px;
+  margin: 10px 0;
+}
+h2 {
+  font-size: 18px;
+  margin: 10px 0;
+  border-bottom: 2px solid var(--color2);
+  padding: 5px 0;
+  margin: 15px 0;
+}
+h3 {
+  font-size: 13px;
+  font-weight: bold;
+  margin: 9px 0;
+}
+h4 {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+ul {
+  list-style: none;
+}
+ul.stripe {
+  li {
+    p, a {
+      font-size: 14px;
+      line-height: 1.4;
+    }
+    a {
+      padding: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      color: var(--color2);
+      text-decoration: underline;
+    }
+    p {
+      margin: 5px;
+    }
+  }
+  li:nth-child(odd){
+    background-color: white;
+  }
+  li:last-child {
+    border-bottom: 1px solid var(--color3);
+  }
+}
+
+ol {
+  margin: 7px 0 7px 30px;
+  li {
+    padding: 3px 0;
+  }
+}
+table {
+  border: 1px solid var(--color3);
+}
+table th, table td {
+  text-align: left;
+  padding: 10px;
+  border: 1px solid var(--color3);
+}
+#payjp_checkout_box input[type=button] {
+  font-size: 20px;
+}
+.text_field,
+.select_field,
+.text_area,
+.email_field,
+.password_field,
+.datetime_field {
+  border:  1px solid var(--color2);
+  border-radius: 5px;
+}
+.text_field,
+.select_field,
+.datetime_field {
+  font-size: 20px;
+  width: 300px;
+  height: 34px;
+}
+.text_area {
+  font-size: 14px;
+  width: 100%;
+  max-width: 100%;
+}
+.email_field, .password_field {
+  font-size: 16px;
+  width: 100%;
+  height: 34px;
+  max-width: 300px;
+}
+.submit {
+  display       : inline-block !important;
+  border-radius : 5%;          /* 角丸       */
+  font-size     : 18px;        /* 文字サイズ */
+  text-align    : center;      /* 文字位置   */
+  cursor        : pointer;     /* カーソル   */
+  padding       : 12px 12px;   /* 余白       */
+  background    : #6666ff;     /* 背景色     */
+  color         : #ffffff;     /* 文字色     */
+  line-height   : 1em;         /* 1行の高さ  */
+  transition    : .3s;         /* なめらか変化 */
+  box-shadow    : 3px 3px 4px #666666;  /* 影の設定 */
+  border        : 2px solid #6666ff;    /* 枠の指定 */
+  text-decoration: none;
+}
+.submit:hover {
+  box-shadow    : none;        /* カーソル時の影消去 */
+  color         : #6666ff;     /* 背景色     */
+  background    : #ffffff;     /* 文字色     */
+}
+.destroy_button {
+  display       : inline-block;
+  border-radius : 5%;          /* 角丸       */
+  font-size     : 18px;        /* 文字サイズ */
+  text-align    : center;      /* 文字位置   */
+  cursor        : pointer;     /* カーソル   */
+  padding       : 12px 12px;   /* 余白       */
+  background    : #ff4d4d;     /* 背景色     */
+  color         : #ffffff;     /* 文字色     */
+  line-height   : 1em;         /* 1行の高さ  */
+  transition    : .3s;         /* なめらか変化 */
+  box-shadow    : 3px 3px 4px #666666;  /* 影の設定 */
+  border        : 2px solid #ff4d4d;    /* 枠の指定 */
+}
+.destroy_button:hover {
+  box-shadow    : none;        /* カーソル時の影消去 */
+  color         : #ff4d4d;     /* 背景色     */
+  background    : #ffffff;     /* 文字色     */
+}
+.orange_button {
+  display       : inline-block;
+  border-radius : 5%;          /* 角丸       */
+  font-size     : 18px;        /* 文字サイズ */
+  text-align    : center;      /* 文字位置   */
+  cursor        : pointer;     /* カーソル   */
+  padding       : 12px 12px;   /* 余白       */
+  background    : #ff7f00;     /* 背景色     */
+  color         : #ffffff;     /* 文字色     */
+  line-height   : 1em;         /* 1行の高さ  */
+  transition    : .3s;         /* なめらか変化 */
+  box-shadow    : 6px 6px 3px #666666;  /* 影の設定 */
+  border        : 2px solid #ff7f00;    /* 枠の指定 */
+  text-decoration: none;
+}
+.orange_button:hover {
+  box-shadow    : none;        /* カーソル時の影消去 */
+  color         : #ff7f00;     /* 背景色     */
+  background    : #ffffff;     /* 文字色     */
+}
+.blue_button {
+  color: var(--color1);
+  background-color: var(--color7);
+  font-size: 16px;
+  text-decoration: none;
+  padding: 6px 5px;
+  border-radius: 5px;
+}
+.actions {
+  text-align: right;
+}
+.image {
+  img {
+    max-width: 100%;
+  }
+}
+.font-bold {
+  font-weight: bold !important;
+}
+.characnt {
+  text-align: left;
+  border: none;
+  background-color: rgba(0, 0, 0, 0)
+}
+.icon-size {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+.w-100 {
+  width: 100% !important;
+}
+.py-0 {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+.py-10 {
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+}
+.px-0 {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+.px-10 {
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+}
+.my-0 {
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+}
+.my-10 {
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
+}
+.my-20 {
+  margin-top: 20px !important;
+  margin-bottom: 20px !important;
+}
+.mx-0 {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+.mx-5 {
+  margin-left: 5px !important;
+  margin-right: 5px !important;
+}
+.mx-10 {
+  margin-left: 10px !important;
+  margin-right: 10px !important;
+}
+.text-center {
+  text-align: center;
+}
+.text-left {
+  text-align: left;
+}
+.text-right {
+  text-align: right;
+}
+.display-flex {
+  display: flex;
+}
+.display-none {
+  display: none;
+}
+.justify-center {
+  justify-content: center !important;
+}
+.justify-start {
+  justify-content: flex-start !important;
+}
+.align-center {
+  align-items: center !important;
+}
+.flex-wrap {
+  flex-wrap: wrap !important;
+}
+.row {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+.p-row {
+  display: flex;
+  justify-content: flex-start;
+}
+.color-2 {
+  color: var(--color2);
+}
+.font-size-13 { font-size: 13px !important; }
+.font-size-14 { font-size: 14px !important; }
+
+.field {
+  margin-bottom: 15px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  p {
+    font-size: 16px;
+  }
+}
+.oauth_area {
+  margin: 20px 0 0 0;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+.border_bottom_1 {
+  border-bottom: 1px solid var(--color2);
+}
+a.image_link {
+  padding: 2px;
+  margin: 0 8px;
+  text-decoration: none !important;
+}
+a.category {
+  font-size: 14px;
+  background-color: var(--color1);
+  color: black;
+  border: 1px solid var(--color3);
+  display: inline-block;
+  padding: 5px 8px;
+  text-decoration: none;
+  margin: 5px 0;
+}
+img.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  object-fit: cover;
+}
+#overray {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 301;
+  background-color: rgba(0,0,0,0.5);
+  display: none;
+  .send_now {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    text-align: center;
+    p {
+      color: white;
+      font-weight: bold;
+      font-size: 36px;
+      text-align: center;
+    }
+    progress {
+      width: 300px;
+      max-width: 100%;
+    }
+  }
+}
+#error_explanation {
+  li {
+    color: red;
+  }
+}
+.error_message {
+  color: red;
+}
+video::-webkit-media-controls-enclosure {
+  overflow:hidden;
+}
+video::-webkit-media-controls-panel {
+  width: calc(100% + 30px);
+}
+.alert-error {
+  color: red;
+}
+.red {
+  color: red;
+}
+.no-back,
+button.clipboard-btn {
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+}
+.clicker {
+  cursor: pointer;
+}
+.hidden {
+  display: hidden;
+}
+.close_button {
+  font-size: 24px;
+  padding: 0 20px;
+}
+#textarea {
+  height: 25px;
+  background-color: var(--color4);
+  border: none;
+  border-bottom: 2px solid var(--color2);
+  border-radius: 3px;
+  overflow: hidden;
+}
+#textarea:focus {
+  border: 1px solid var(--color7);
+  outline: 0;
+}
+.flex-grow-1 { flex-grow: 1; }
+.flex-grow-2 { flex-grow: 2; }
+.flex-grow-3 { flex-grow: 3; }
+// トグルスイッチ
+/* === ボタンを表示するエリア ============================== */
+.switchArea {
+  line-height    : 36px;                /* 1行の高さ          */
+  letter-spacing : 0;                   /* 文字間             */
+  text-align     : center;              /* 文字位置は中央     */
+  font-size      : 15px;                /* 文字サイズ         */
+
+  position       : relative;            /* 親要素が基点       */
+  width          : 88px;               /* ボタンの横幅       */
+  background     : #fff;                /* デフォルト背景色   */
+}
+
+ /* === チェックボックス ==================================== */
+.switchArea input[type="checkbox"] {
+  display        : none;            /* チェックボックス非表示 */
+}
+
+ /* === チェックボックスのラベル（標準） ==================== */
+.switchArea label {
+  display        : block;               /* ボックス要素に変更 */
+  box-sizing     : border-box;          /* 枠線を含んだサイズ */
+  height         : 36px;                /* ボタンの高さ       */
+  border         : 2px solid #999999;   /* 未選択タブのの枠線 */
+  border-radius  : 18px;                /* 角丸               */
+}
+
+ /* === チェックボックスのラベル（ONのとき） ================ */
+.switchArea input[type="checkbox"]:checked +label {
+  border-color   : #6666ff;             /* 選択タブの枠線     */
+}
+
+ /* === 表示する文字（標準） ================================ */
+.switchArea label span:after{
+  content        : "OFF";               /* 表示する文字       */
+  padding        : 0 0 0 21px;          /* 表示する位置       */
+  color          : #999999;             /* 文字色             */
+}
+
+ /* === 表示する文字（ONのとき） ============================ */
+.switchArea  input[type="checkbox"]:checked + label span:after{
+  content        : "ON";                /* 表示する文字       */
+  padding        : 0 21px 0 0;          /* 表示する位置       */
+  color          : #6666ff;             /* 文字色             */
+}
+
+ /* === 丸部分のSTYLE（標準） =============================== */
+.switchArea #swImg {
+  position       : absolute;            /* 親要素からの相対位置*/
+  width          : 28px;                /* 丸の横幅           */
+  height         : 28px;                /* 丸の高さ           */
+  background     : #999999;             /* カーソルタブの背景 */
+  top            : 4px;                 /* 親要素からの位置   */
+  left           : 4px;                 /* 親要素からの位置   */
+  border-radius  : 14px;                /* 角丸               */
+  transition     : .2s;                 /* 滑らか変化         */
+}
+
+ /* === 丸部分のSTYLE（ONのとき） =========================== */
+.switchArea input[type="checkbox"]:checked ~ #swImg {
+  transform      : translateX(52px);    /* 丸も右へ移動       */
+  background     : #6666ff;             /* カーソルタブの背景 */
+}
+
+.container {
+  width: 1280px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
 .flex {
   display: flex;
 }
@@ -12,9 +498,4 @@
 }
 .table-title, .table-channel_name {
   max-width: 150px;
-}
-
-.py-5 {
-  padding-top: 5px;
-  padding-bottom: 5px;
 }

@@ -18,7 +18,7 @@ class VideosTest < ApplicationSystemTestCase
     fill_in "Channel name", with: @video.channel_name
     fill_in "Channel url", with: @video.channel_url
     fill_in "Description", with: @video.description
-    fill_in "Play count", with: @video.play_count
+    fill_in "Play count", with: @video.view_count
     fill_in "Posted date", with: @video.posted_date
     fill_in "Thumbnail", with: @video.thumbnail
     fill_in "Title", with: @video.title
@@ -37,7 +37,7 @@ class VideosTest < ApplicationSystemTestCase
     fill_in "Channel name", with: @video.channel_name
     fill_in "Channel url", with: @video.channel_url
     fill_in "Description", with: @video.description
-    fill_in "Play count", with: @video.play_count
+    fill_in "Play count", with: @video.view_count
     fill_in "Posted date", with: @video.posted_date
     fill_in "Thumbnail", with: @video.thumbnail
     fill_in "Title", with: @video.title

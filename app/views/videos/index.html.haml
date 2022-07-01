@@ -4,6 +4,14 @@
       = form.text_field :url
     %div
       = form.submit
+= form_with(url: channel_videos_videos_path, method: :get) do |form|
+  .flex
+    %div
+      = form.text_field :channel_url, local: true
+      - date = (Time.now - 6.month).strftime('%Y-%m-%dT%H:%M')
+      = form.datetime_field  :posted_date, value: date, class: 'datetime_field'
+    %div
+      = form.submit
 = link_to '全て削除', all_delete_videos_path
 #videos
   %table.table
@@ -12,10 +20,13 @@
       %th{class: 'table-thumbnail'} サムネ
       %th{class: 'table-url'} リンク
       %th{class: 'table-posted_date'} 投稿日時
-      %th{class: 'table-play_count'} 再生回数
+      %th{class: 'table-view_count'}
+        = link_to '再生回数', order_videos_path(order: 'viewCount')
       %th{class: 'table-channel_name'} チャンネル名
       %th{class: 'table-channel_member'} 登録者数
-      %th{class: 'table-video_power'} 再生率
+      %th{class: 'table-video_power'}
+        = link_to '再生率', order_videos_path(order: 'viewRate')
       %th{class: 'table-delete'} 削除
+      %th{class: 'table-delete'} 保護
     - @videos.each do |video|
       = render video
