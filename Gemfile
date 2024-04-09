@@ -53,6 +53,7 @@ gem 'erb2haml', '~> 0.1.5'
 gem 'devise', '~> 4.7', '>= 4.7.1'
 gem 'dotenv-rails', '~> 2.7', '>= 2.7.5'
 gem 'kaminari', '~> 1.1', '>= 1.1.1'
+gem 'httparty', '~> 0.21.0'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

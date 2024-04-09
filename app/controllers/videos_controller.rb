@@ -1,5 +1,6 @@
 require 'open-uri'
 require 'json'
+require 'httparty'
 class VideosController < ApplicationController
   before_action :set_video, only: %i[ show edit update destroy ]
 
@@ -61,8 +62,10 @@ class VideosController < ApplicationController
 
   # DELETE /videos/1 or /videos/1.json
   def destroy
-    @video.destroy
-
+    unless @video.protection
+      @video.destroy
+    end
+    
     respond_to do |format|
       format.html { redirect_to videos_url, notice: "Video was successfully destroyed." }
       format.json { head :no_content }
@@ -71,7 +74,7 @@ class VideosController < ApplicationController
 
   def all_delete
     @videos = Video.all
-    @videos.destroy_all
+    @videos.where(protection: false).destroy_all
 
     redirect_to videos_path
   end
@@ -80,14 +83,12 @@ class VideosController < ApplicationController
     channel_url = params[:channel_url]
     channel_url = channel_url.gsub(/http.+v=/, "")
     channel_url = channel_url.gsub(/http.+be\//, "")
-    channel_url = channel_url.gsub(/&.+./, "")
+    channel_id = get_channel_id_from_custom_url(params[:channel_url])
 
-    if params[:posted_date].present?
-      channel_url = "https://www.googleapis.com/youtube/v3/search?key=#{ENV['YOTUBE_API_KEY']}&channelId=#{channel_url}&maxResults=50&order=date&publishedAfter=#{params[:posted_date]}:00Z"
-    else
-      channel_url = "https://www.googleapis.com/youtube/v3/search?key=#{ENV['YOTUBE_API_KEY']}&channelId=#{channel_url}&maxResults=50&order=date&publishedAfter=2021-01-15T00:00:00Z"
-    end
+    channel_url = "https://www.googleapis.com/youtube/v3/search?key=#{ENV['YOTUBE_API_KEY']}&channelId=#{channel_id}&maxResults=50&order=date&publishedAfter=#{params[:posted_date]}:00Z"
 
+    p "----------------------------------------"
+    p channel_id
     begin
       #チャンネル情報取得
       json = URI.open(channel_url)
@@ -101,11 +102,22 @@ class VideosController < ApplicationController
     rescue
 
     end
-    redirect_to videos_path
+
+    @videos = Video.where(channel_id: channel_id).order(view_count: :desc)
+    @newvideo = Video.new
+
+    render 'index'
+  end
+
+  def channels
+    @videos = Video.where(channel_id: params[:channel_id]).order(view_count: :desc)
+    @newvideo = Video.new
+
+    render 'index'
   end
 
   def channel_delete
-    Video.where(channel_id: params[:channel_id]).destroy_all
+    Video.where(channel_id: params[:channel_id]).where(protection: false).destroy_all
 
     redirect_to videos_path
   end
@@ -118,6 +130,12 @@ class VideosController < ApplicationController
     else
       @video.update(protection: true)
     end
+
+    render turbo_stream: turbo_stream.replace(
+      "protection_#{@video.id}",
+      partial: 'videos/protection',
+      locals: { video: @video},
+    )
   end
 
   private
@@ -195,8 +213,9 @@ class VideosController < ApplicationController
           urlError = true
         end
       end
-      
-      @video.view_rate = ((@video.view_count.to_f / @video.channel_member_count.to_f) * 100.0).round(1)
+      if @video.view_count.present? && @video.channel_member_count.present?
+        @video.view_rate = ((@video.view_count.to_f / @video.channel_member_count.to_f) * 100.0).round(1)
+      end
     end
 
     # Only allow a list of trusted parameters through.
@@ -212,5 +231,30 @@ class VideosController < ApplicationController
                     :channel_name,
                     :channel_url,
                     :protection)
+    end
+
+    def get_channel_id_from_custom_url(custom_url)
+      # 動画ページURLから動画IDを抽出
+      video_id = custom_url.split('watch?v=').last.split('&').first
+
+      # YouTube Data APIを呼び出して動画情報を取得
+      api_url = "https://www.googleapis.com/youtube/v3/videos?part=snippet&id=#{video_id}&key=#{ENV['YOTUBE_API_KEY']}"
+
+      begin
+        response = HTTParty.get(api_url)
+        if response.code == 200
+          json_response = JSON.parse(response.body)
+          if json_response["items"] && !json_response["items"].empty?
+            # チャンネルIDを取得
+            return json_response["items"][0]["snippet"]["channelId"]
+          else
+            return "チャンネルIDが見つかりません"
+          end
+        else
+          return "APIリクエストに失敗しました: #{response.code}"
+        end
+      rescue => e
+        return "エラーが発生しました: #{e}"
+      end
     end
 end

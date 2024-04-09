@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       get :channel_videos
       get :order
       get :channel_delete
+      get :channels
     end
     member do
       get :protection

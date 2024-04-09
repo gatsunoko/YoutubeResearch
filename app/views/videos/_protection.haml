@@ -1,7 +1,8 @@
-.like.mx-10.text-right{:id => "protection_#{video.id.to_s}"}
-  - if video.protection
-    = link_to protection_video_path(video.id), remote: true do
-      = image_tag 'good_after.png', class: 'icon-size'
-  - else
-    = link_to protection_video_path(video.id), remote: true do
-      = image_tag 'good_before.png', class: 'icon-size'
+= turbo_frame_tag "protection_#{video.id.to_s}" do
+  .like.mx-10.text-right
+    - if video.protection
+      = link_to protection_video_path(video.id) do
+        = image_tag 'good_after.png', class: 'icon-size'
+    - else
+      = link_to protection_video_path(video.id) do
+        = image_tag 'good_before.png', class: 'icon-size'

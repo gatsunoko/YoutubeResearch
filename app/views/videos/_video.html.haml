@@ -21,7 +21,8 @@
       - if video.channel_icon.present? 
         = image_tag video.channel_icon
       %p
-        = link_to "開く", "https://www.youtube.com/channel/#{video.channel_id}", target: :_blank, rel: "noopener noreferrer"
+        -# = link_to "開く", "https://www.youtube.com/channel/#{video.channel_id}", target: :_blank, rel: "noopener noreferrer"
+        = link_to "開く", channels_videos_path(channel_id: video.channel_id)
     %td.table-thumbnail
       - if video.channel_member_count.present?
         %p
