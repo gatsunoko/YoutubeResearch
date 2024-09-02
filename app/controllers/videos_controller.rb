@@ -88,7 +88,7 @@ class VideosController < ApplicationController
     channel_url = "https://www.googleapis.com/youtube/v3/search?key=#{ENV['YOTUBE_API_KEY']}&channelId=#{channel_id}&maxResults=50&order=date&publishedAfter=#{params[:posted_date]}:00Z"
 
     p "----------------------------------------"
-    p channel_id
+    p params[:posted_date]
     begin
       #チャンネル情報取得
       json = URI.open(channel_url)
@@ -105,7 +105,9 @@ class VideosController < ApplicationController
 
     @videos = Video.where(channel_id: channel_id).order(view_count: :desc)
     @newvideo = Video.new
-
+    @search_date = params[:posted_date] #検索に使われた日付を持ちこして、代入するための変数
+    p "----------------------------------------"
+    p @search_date
     render 'index'
   end
 

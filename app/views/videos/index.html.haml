@@ -3,15 +3,18 @@
     %div
       = form.text_field :url
     %div
-      = form.submit
+      = form.submit '単体登録'
 = form_with(url: channel_videos_videos_path, method: :get) do |form|
   .flex
     %div
       = form.text_field :channel_url, local: true
-      - date = (Time.now - 6.month).strftime('%Y-%m-%dT%H:%M')
+      - if @search_date.present? 
+        - date = (@search_date)
+      - else
+        - date = (Time.now - 6.month).strftime('%Y-%m-%dT%H:%M')
       = form.datetime_field  :posted_date, value: date, class: 'datetime_field'
     %div
-      = form.submit
+      = form.submit '検索'
 = link_to '全て削除', all_delete_videos_path
 #videos
   %table.table
