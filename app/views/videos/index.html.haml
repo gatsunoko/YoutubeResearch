@@ -4,18 +4,15 @@
       = form.text_field :url
     %div
       = form.submit '単体登録'
+- date = @search_date.presence || (Time.now - 6.month).strftime('%Y-%m-%dT%H:%M')
 = form_with(url: channel_videos_videos_path, method: :get) do |form|
   .flex
     %div
       = form.text_field :channel_url, local: true
-      - if @search_date.present? 
-        - date = (@search_date)
-      - else
-        - date = (Time.now - 6.month).strftime('%Y-%m-%dT%H:%M')
       = form.datetime_field  :posted_date, value: date, class: 'datetime_field'
     %div
       = form.submit '検索'
-= link_to '全て削除', all_delete_videos_path
+= link_to '全て削除', all_delete_videos_path(posted_date: date)
 #videos
   %table.table
     %tr
@@ -31,5 +28,6 @@
         = link_to '再生率', order_videos_path(order: 'viewRate')
       %th{class: 'table-delete'} 削除
       %th{class: 'table-delete'} 保護
+      %th{class: 'table-delete'} メモ
     - @videos.each do |video|
       = render video

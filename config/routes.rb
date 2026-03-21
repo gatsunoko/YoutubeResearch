@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       get :order
       get :channel_delete
       get :channels
+      post :detail_save
     end
     member do
       get :protection

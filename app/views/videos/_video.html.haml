@@ -36,3 +36,6 @@
       = link_to "ch 削除", channel_delete_videos_path(channel_id: video.channel_id), method: :get
     %td
       = render 'protection', video: video
+    %td
+      = simple_format(sanitize(video.detail, tags: %w(p br)))
+      = link_to('編集', edit_video_path(video))

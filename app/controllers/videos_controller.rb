@@ -8,6 +8,7 @@ class VideosController < ApplicationController
   def index
     @videos = Video.all.order(id: :desc)
     @newvideo = Video.new
+    @search_date = params[:posted_date]
   end
 
   def order
@@ -76,7 +77,7 @@ class VideosController < ApplicationController
     @videos = Video.all
     @videos.where(protection: false).destroy_all
 
-    redirect_to videos_path
+    redirect_to videos_path(posted_date: params[:posted_date])
   end
 
   def channel_videos
@@ -87,8 +88,6 @@ class VideosController < ApplicationController
 
     channel_url = "https://www.googleapis.com/youtube/v3/search?key=#{ENV['YOTUBE_API_KEY']}&channelId=#{channel_id}&maxResults=50&order=date&publishedAfter=#{params[:posted_date]}:00Z"
 
-    p "----------------------------------------"
-    p params[:posted_date]
     begin
       #チャンネル情報取得
       json = URI.open(channel_url)
@@ -106,8 +105,7 @@ class VideosController < ApplicationController
     @videos = Video.where(channel_id: channel_id).order(view_count: :desc)
     @newvideo = Video.new
     @search_date = params[:posted_date] #検索に使われた日付を持ちこして、代入するための変数
-    p "----------------------------------------"
-    p @search_date
+
     render 'index'
   end
 
@@ -138,6 +136,10 @@ class VideosController < ApplicationController
       partial: 'videos/protection',
       locals: { video: @video},
     )
+  end
+
+  def detail_save
+      
   end
 
   private
@@ -232,7 +234,8 @@ class VideosController < ApplicationController
                     :channel_id,
                     :channel_name,
                     :channel_url,
-                    :protection)
+                    :protection,
+                    :detail)
     end
 
     def get_channel_id_from_custom_url(custom_url)
